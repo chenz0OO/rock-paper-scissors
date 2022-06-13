@@ -19,11 +19,10 @@
 </head>
 
 <body>
-    <div class="start-screen-container">
+    <!-- Start screen -->
+    <div id="start-screen-container" class="start-screen-container show">
         <div id="start-screen" class="start-screen">
-            <div class="main-heading">
-                <h1 class="main-heading-text">ROCK<br>PAPER<br>SCISSORS</h1>
-            </div>
+            <h1 class="main-heading-text">ROCK<br>PAPER<br>SCISSORS</h1>
         
             <input type="text" id="player-name" name="player-name" placeholder="Player Name">
             <button id="start-button">
@@ -33,12 +32,12 @@
     </div>
 
 
-
+    <!-- Game screen -->
     <div id="game-screen" class="game-screen">
         <!-- Player names and scores -->
         <div class="scoreboard">
             <div class="scores">
-                <h1 class="name-heading player-name">Player 1</h1>
+                <h1 id="player-name-heading" class="name-heading player-name">Player 1</h1>
                 <h2 class="score-heading">score</h2>
                 <h2 class="score-heading score-num">0</h2>
             </div>
@@ -63,7 +62,7 @@
         <button id="play-button">PLAY ROUND</button>
     </div>
 
-    <script type="module" src="main.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

@@ -16,38 +16,52 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
-#start-screen {
-    z-index: 2;
-}
-
-#game-screen {
-    z-index: -1;
-}
-
-.start-screen, .game-screen {
+body {
     background-color: black;
-    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.start-screen-container {
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100vh;
+    width: 100vw;
+    background-color: black;
+    /* border: 2px solid blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.start-screen-container.show {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.start-screen {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-.main-heading {
-    margin-bottom: 10vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 5vw 5vh;
+    max-width: 100;
 }
 
 .main-heading-text {
     font-family: 'Press Start 2P', monospace;
     font-size: 7rem;
     text-align: center;
+    margin-bottom: 10vh;
 }
 
 #start-button,
@@ -59,7 +73,7 @@
 
 #player-name {
     border-bottom: 2px solid var(--light-grey);
-    padding-left: 20px;
+    padding-left: 1vw;
     padding-bottom: 1vh;
     width: 288px;
     margin-bottom: 3vh;

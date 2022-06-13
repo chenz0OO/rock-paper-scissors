@@ -1,5 +1,10 @@
-.container {
+.game-screen {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5vw 5vh;
+    max-width: 100;
 }
 
 .scoreboard {
@@ -32,6 +37,7 @@
     font-size: 3rem;
     font-family: 'Press Start 2P', monospace;
     line-height: 2em;
+    min-width: 30vw;
 }
 
 .score-num {
@@ -46,16 +52,11 @@
     color: var(--cyan);
 }
 
-.player-name,
-.computer-name {
-    padding-bottom: 5vh;
-    width: 30vw;
-    height: 8vw;
-}
-
 .rps-image-container {
     display: flex;
     gap: 5vw;
+    min-height: 20vh;
+    /* border: 1px solid blue; */
 }
 
 .rps-image {

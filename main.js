@@ -1,28 +1,26 @@
-// DECLARE CONSTANTS
 const MOVES = ['ROCK', 'PAPER', 'SCISSORS'];
 
+// Declare blinking text variable to store interval id 
+let displayInterval;
+
+// Add blinking for 'start game' text
 window.addEventListener('load', () => {
     const title = document.getElementById('start-game');
 
-    setInterval( () => {
+    // Set interval to display 'start game' on timer
+    displayInterval = setInterval( () => {
         title.style.display = title.style.display === 'none' ? '' : 'none';
     }, 600);
 }, false);
 
-/*
-* Dynamically change the size of the input text 
-* box depending on the number of characters
-*/
+// Dynamically change the size of the input text 
 const nameInput = document.getElementById('player-name');
-console.log(nameInput);
-// Store player name in variable
 let playerName = '';
+
 // Event listener for typing keys
-// Arrow function to resize input field
-nameInput.addEventListener('keydown', event => {
+nameInput.addEventListener('keyup', event => {
     // Check how many characters typed, store char count and update player name
     const inputWord = event.target.value ? event.target.value : '';
-    console.log(inputWord);
     const charCount = inputWord.length + 1;
     playerName = inputWord;
 
@@ -42,10 +40,18 @@ nameInput.addEventListener('keydown', event => {
     }
 });
 
-/*
-* Take player name and pass it through to game
-* then take player to the game screen
-*/
+// Hide start screen when 'start game' clicked
+const startScreen = document.getElementById('start-screen-container');
+const startButton = document.getElementById('start-button');
+const playerNameHeading = document.getElementById('player-name-heading');
+
+startButton.addEventListener('click', () => {
+    startScreen.classList.remove('show');
+    // Stop text flashing 
+    clearInterval(displayInterval);
+    if (playerName) playerNameHeading.innerText = playerName;
+});
+
 
 
 const playButton = document.getElementById('play-button');
@@ -55,19 +61,9 @@ playButton.addEventListener('click', () => {
     playButton.style.display = 'none';
 });
 
-/*
-* ------------------------------------------------------------------------
-*                        ROCK PAPER SCISSORS
-*                        SECTION: GAME PLAY
-* ------------------------------------------------------------------------
-*/
 
 // const playButton = document.getElementById('play-button');
 // playButton.addEventListener('click', () => console.log('clicked'));
-
-
-
-
 
 
 // Function to generate random computer move
