@@ -1,0 +1,91 @@
+.container {
+    justify-content: center;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3vw;
+    margin: 5vw;
+}
+
+.scores {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 6em;
+}
+
+.name-heading {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 4rem;
+}
+
+.vs {
+    color: var(--red);
+    font-size: 6rem;
+}
+
+.score-heading {
+    font-size: 3rem;
+    font-family: 'Press Start 2P', monospace;
+    line-height: 2em;
+}
+
+.score-num {
+    font-size: 6rem;
+}
+
+.player-name {
+    color: var(--yellow);
+}
+
+.computer-name {
+    color: var(--cyan);
+}
+
+.player-name,
+.computer-name {
+    padding-bottom: 5vh;
+    width: 30vw;
+    height: 8vw;
+}
+
+.rps-image-container {
+    display: flex;
+    gap: 5vw;
+}
+
+.rps-image {
+    width: 10vw;
+    height: auto;
+    align-self: baseline;
+    cursor: pointer;
+}
+
+.rps-image:hover {
+    width: 11vw;
+}
+
+#play-button {
+    background-color: var(--red);
+    margin-top: 8vh;
+    padding: 20px 70px;
+    border: none;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.3rem;
+    color: var(--off-white);
+    cursor: pointer;
+
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 6px 0px var(--dark-red);
+    -moz-box-shadow: 0px 6px 0px var(--dark-red);
+    box-shadow: 0px 6px 0px var(--dark-red);
+}
+
+#play-button:hover {
+    background-color: var(--mid-red);
+}

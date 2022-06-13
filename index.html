@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/start.css">
+    <link rel="stylesheet" href="styles/game.css">
+    <!-- Google font API -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Roboto Mono and Press Start 2P fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="start-screen-container">
+        <div id="start-screen" class="start-screen">
+            <div class="main-heading">
+                <h1 class="main-heading-text">ROCK<br>PAPER<br>SCISSORS</h1>
+            </div>
+        
+            <input type="text" id="player-name" name="player-name" placeholder="Player Name">
+            <button id="start-button">
+                <h4 id="start-game">START GAME</h4>
+            </button>
+        </div>
+    </div>
+
+
+
+    <div id="game-screen" class="game-screen">
+        <!-- Player names and scores -->
+        <div class="scoreboard">
+            <div class="scores">
+                <h1 class="name-heading player-name">Player 1</h1>
+                <h2 class="score-heading">score</h2>
+                <h2 class="score-heading score-num">0</h2>
+            </div>
+
+            <h1 class="name-heading vs">VS</h1>
+
+            <div class="scores">
+                <h1 class="name-heading computer-name">Computer AI</h1>
+                <h2 class="score-heading">score</h2>
+                <h2 class="score-heading score-num">0</h2>
+            </div>
+        </div>
+
+        <!-- Rock, Paper, Scissors images -->
+        <div class="rps-image-container">
+            <img class="rps-image" src="images/rock.png" alt="rock">
+            <img class="rps-image" src="images/paper.png" alt="paper">
+            <img class="rps-image" src="images/scissors.png" alt="scissors">
+        </div>
+
+        <!-- Play game button -->
+        <button id="play-button">PLAY ROUND</button>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
