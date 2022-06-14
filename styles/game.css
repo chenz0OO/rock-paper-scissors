@@ -13,7 +13,6 @@
     align-items: flex-end;
     gap: 3vw;
     margin: 5% auto;
-    border: 1px solid purple;
 }
 
 .scores {
@@ -22,7 +21,6 @@
     align-items: center;
     text-align: center;
     line-height: 6em;
-    border: 1px solid blue;
     width: 50%;
 }
 
@@ -40,7 +38,6 @@
     font-size: 3rem;
     line-height: 2em;
     width: 100%;
-    border: 1px solid green;
 }
 
 .score-num {

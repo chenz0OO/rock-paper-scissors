@@ -1,7 +1,9 @@
-const MOVES = ['ROCK', 'PAPER', 'SCISSORS'];
+const MOVES = ['rock', 'paper', 'scissors'];
 const COMPUTER_NAMES = ['R2-D2', 'The Terminator', 'Optimus Prime', 'HAL', 'WALL-E'];
 
 const randomIndex = num => Math.floor(Math.random() * num);
+
+// Set computer name to random name from array
 const computerName = COMPUTER_NAMES[randomIndex(COMPUTER_NAMES.length)]
 const computerHeading = document.getElementById('computer-name-heading');
 computerHeading.innerText = computerName;
@@ -72,72 +74,84 @@ playButton.addEventListener('click', () => {
     playButton.style.display = 'none';
 });
 
+// Play the game
+const playerScoreElement = document.getElementById('player-score');
+const computerScoreElement = document.getElementById('computer-score');
+const rock = document.getElementById('rock');
+const paper = document.getElementById('paper');
+const scissors = document.getElementById('scissors');
 
-// const playButton = document.getElementById('play-button');
-// playButton.addEventListener('click', () => console.log('clicked'));
+let playerScore = 0;
+let computerScore = 0;
 
+rock.addEventListener('click', playRound);
+paper.addEventListener('click', playRound);
+scissors.addEventListener('click', playRound);
+
+// Function to play 1 round of rock, paper, scissors
+function playRound(event) {
+    const playerMove = event.target.id;
+    const computerMove = computerPlay();
+
+    const result = checkResult(playerMove, computerMove);
+    updateScores(result, playerMove, computerMove);
+
+    if (isGameOver()) displayWinner();
+}
+
+// Function to check if game is over
+function isGameOver() {
+    if (playerScore === 5 || computerScore === 5) return true;
+    return false;
+}
 
 // Function to generate random computer move
 function computerPlay() {
     return MOVES[randomIndex(3)];
 }
 
-// Function to play round of Rock Paper Scissors
-function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toUpperCase();
-
-    if ((playerSelection === 'ROCK' && computerSelection === 'PAPER') ||
-        (playerSelection === 'PAPER' && computerSelection === 'SCISSORS') ||
-        (playerSelection === 'SCISSORS' && computerSelection === 'ROCK')) {
+// Function to check whether win, lose or draw
+function checkResult(playerMove, computerMove) {
+    if ((playerMove === 'rock' && computerMove === 'paper') ||
+        (playerMove === 'paper' && computerMove === 'scissors') ||
+        (playerMove === 'scissors' && computerMove === 'rock')) {
         return 'lose';
-    } else if (playerSelection === computerSelection) {
+    } else if (playerMove === computerMove) {
         return 'draw';
     } else {
         return 'win';
     }
 }
 
-// Function to play the game
-function playGame() {
-    let playerWins = 0;
-    let computerWins = 0;
-
-    const playerSelection = prompt('What is your move? (rock/paper/scissors)').toUpperCase();
-
-    // Check valid entry by user
-    if (playerSelection !== 'ROCK' &&
-        playerSelection !== 'PAPER' &&
-        playerSelection !== 'SCISSORS') {
-        console.log('Invalid move');
-        throw new Error('Invalid move');
-    }
-
-    const computerSelection = computerPlay();
-    const result = playRound(playerSelection, computerSelection);
-
+// Function to update scores according to winner
+function updateScores(result, playerMove, computerMove) {
     switch (result) {
         case 'win':
-            playerWins += 1;
-            console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
+            playerScore++;
+            playerScoreElement.innerText = playerScore;
+            console.log(`You Win! ${playerMove} beats ${computerMove}`);
             break;
         case 'lose':
-            computerWins += 1;
-            console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
+            computerScore++;
+            computerScoreElement.innerText = computerScore;
+            console.log(`You Lose! ${computerMove} beats ${playerMove}`);
             break;
         case 'draw':
-            console.log(`It's a Draw! ${playerSelection} draws with ${computerSelection}`);
+            console.log(`It's a Draw! ${playerMove} draws with ${computerMove}`);
             break;
     }
+}
 
-
-    // if (playerWins > computerWins) {
-    //     console.log('YOU WON THE GAME! :D')
-    // } else if (computerWins > playerWins) {
-    //     console.log('YOU LOST THE GAME! :(')
-    // } else {
-    //     console.log('IT\'S A DRAW');
-    // }
-    // console.log(`You won ${playerWins} ${playerWins > 1 ? 'rounds' : 'round'}.`);
-    // console.log(`Computer won ${computerWins} ${computerWins > 1 ? 'rounds' : 'round'}.`);
-    // console.log('Thanks for playing ;)');
+// Function to display the winner of the game
+function displayWinner() {
+    if (playerScore > computerScore) {
+        console.log('YOU WON THE GAME! :D')
+    } else if (computerScore > playerScore) {
+        console.log('YOU LOST THE GAME! :(')
+    } else {
+        console.log('IT\'S A DRAW');
+    }
+    console.log(`You won ${playerScore} ${playerScore > 1 ? 'rounds' : 'round'}.`);
+    console.log(`Computer won ${computerScore} ${computerScore > 1 ? 'rounds' : 'round'}.`);
+    console.log('Thanks for playing ;)');
 }
