@@ -2,10 +2,12 @@ const MOVES = ['rock', 'paper', 'scissors'];
 const COMPUTER_NAMES = ['R2-D2', 'The Terminator', 'Optimus Prime', 'HAL', 'WALL-E'];
 
 const randomIndex = num => Math.floor(Math.random() * num);
+const getElement = id => document.getElementById(id);
+const capitalizeString = string => string.charAt(0).toUpperCase() + string.slice(1);
 
 // Set computer name to random name from array
 const computerName = COMPUTER_NAMES[randomIndex(COMPUTER_NAMES.length)]
-const computerHeading = document.getElementById('computer-name-heading');
+const computerHeading = getElement('computer-name-heading');
 computerHeading.innerText = computerName;
 
 // Declare blinking text variable to store interval id 
@@ -13,7 +15,7 @@ let displayInterval;
 
 // Add blinking for 'start game' text
 window.addEventListener('load', () => {
-    const title = document.getElementById('start-game');
+    const title = getElement('start-game');
 
     // Set interval to display 'start game' on timer
     displayInterval = setInterval( () => {
@@ -22,7 +24,7 @@ window.addEventListener('load', () => {
 }, false);
 
 // Dynamically change the size of the input text 
-const nameInput = document.getElementById('player-name');
+const nameInput = getElement('player-name');
 let playerName = '';
 
 // Event listener for typing keys
@@ -49,9 +51,9 @@ nameInput.addEventListener('keyup', event => {
 });
 
 // Hide start screen when 'start game' clicked
-const startScreen = document.getElementById('start-screen-container');
-const startButton = document.getElementById('start-button');
-const playerNameHeading = document.getElementById('player-name-heading');
+const startScreen = getElement('start-screen-container');
+const startButton = getElement('start-button');
+const playerNameHeading = getElement('player-name-heading');
 
 startButton.addEventListener('click', closeStartScreen);
 nameInput.addEventListener('keyup', event => {
@@ -65,21 +67,19 @@ function closeStartScreen() {
     if (playerName) playerNameHeading.innerText = playerName;
 }
 
-
-
-const playButton = document.getElementById('play-button');
-const rpsImages = document.getElementById('rps-image-container');
-
-playButton.addEventListener('click', () => {
-    playButton.style.display = 'none';
-});
+// Pop-up to show round result
+const roundResult = getElement('round-winner-container');
+const resultHeading = getElement('round-result-heading');
+const emoji = getElement('emoji');
+const playNextRound = getElement('play-button');
+playNextRound.addEventListener('click', () => roundResult.classList.remove('show'));
 
 // Play the game
-const playerScoreElement = document.getElementById('player-score');
-const computerScoreElement = document.getElementById('computer-score');
-const rock = document.getElementById('rock');
-const paper = document.getElementById('paper');
-const scissors = document.getElementById('scissors');
+const playerScoreElement = getElement('player-score');
+const computerScoreElement = getElement('computer-score');
+const rock = getElement('rock');
+const paper = getElement('paper');
+const scissors = getElement('scissors');
 
 let playerScore = 0;
 let computerScore = 0;
@@ -97,6 +97,8 @@ function playRound(event) {
     updateScores(result, playerMove, computerMove);
 
     if (isGameOver()) displayWinner();
+    
+    displayResult();
 }
 
 // Function to check if game is over
@@ -129,29 +131,39 @@ function updateScores(result, playerMove, computerMove) {
         case 'win':
             playerScore++;
             playerScoreElement.innerText = playerScore;
-            console.log(`You Win! ${playerMove} beats ${computerMove}`);
+            resultHeading.innerText = `${capitalizeString(playerMove) } beats ${computerMove}, you win!`
+            emoji.innerText = String.fromCodePoint(0x1F929);
             break;
         case 'lose':
             computerScore++;
             computerScoreElement.innerText = computerScore;
-            console.log(`You Lose! ${computerMove} beats ${playerMove}`);
+            resultHeading.innerText = `${capitalizeString(computerMove) } beats ${playerMove}, you lose!`
+            emoji.innerText = String.fromCodePoint(0x1F92C);
             break;
         case 'draw':
-            console.log(`It's a Draw! ${playerMove} draws with ${computerMove}`);
+            resultHeading.innerText = `${capitalizeString(playerMove)} draws with ${computerMove}, it's a draw!`
+            emoji.innerText = String.fromCodePoint(0x1F61B);
             break;
     }
 }
 
+// Function to display the results of game round
+function displayResult() {
+    roundResult.classList.add('show');
+}
+
 // Function to display the winner of the game
 function displayWinner() {
+    resultHeading.innerText = 'GAME OVER';
+    emoji.style.fontSize = '7rem'
+
     if (playerScore > computerScore) {
-        console.log('YOU WON THE GAME! :D')
-    } else if (computerScore > playerScore) {
-        console.log('YOU LOST THE GAME! :(')
+        emoji.innerText = 'You won!';
+        emoji.style.color = 'var(--yellow)'
     } else {
-        console.log('IT\'S A DRAW');
+        emoji.innerText = 'You lost!';
+        emoji.style.color = 'var(--dark-red)'
     }
-    console.log(`You won ${playerScore} ${playerScore > 1 ? 'rounds' : 'round'}.`);
-    console.log(`Computer won ${computerScore} ${computerScore > 1 ? 'rounds' : 'round'}.`);
-    console.log('Thanks for playing ;)');
+
+    playNextRound.innerHTML = "<a href='index.html'>PLAY AGAIN</a>";
 }
