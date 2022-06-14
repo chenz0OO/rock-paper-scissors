@@ -1,4 +1,10 @@
 const MOVES = ['ROCK', 'PAPER', 'SCISSORS'];
+const COMPUTER_NAMES = ['R2-D2', 'The Terminator', 'Optimus Prime', 'HAL', 'WALL-E'];
+
+const randomIndex = num => Math.floor(Math.random() * num);
+const computerName = COMPUTER_NAMES[randomIndex(COMPUTER_NAMES.length)]
+const computerHeading = document.getElementById('computer-name-heading');
+computerHeading.innerText = computerName;
 
 // Declare blinking text variable to store interval id 
 let displayInterval;
@@ -45,12 +51,17 @@ const startScreen = document.getElementById('start-screen-container');
 const startButton = document.getElementById('start-button');
 const playerNameHeading = document.getElementById('player-name-heading');
 
-startButton.addEventListener('click', () => {
+startButton.addEventListener('click', closeStartScreen);
+nameInput.addEventListener('keyup', event => {
+    if (event.key === 'Enter') closeStartScreen();
+})
+
+function closeStartScreen() {
     startScreen.classList.remove('show');
     // Stop text flashing 
     clearInterval(displayInterval);
     if (playerName) playerNameHeading.innerText = playerName;
-});
+}
 
 
 
@@ -68,7 +79,6 @@ playButton.addEventListener('click', () => {
 
 // Function to generate random computer move
 function computerPlay() {
-    const randomIndex = num => Math.floor(Math.random() * num);
     return MOVES[randomIndex(3)];
 }
 

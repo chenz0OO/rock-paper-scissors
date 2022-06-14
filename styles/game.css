@@ -9,10 +9,11 @@
 
 .scoreboard {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-end;
     gap: 3vw;
-    margin: 5vw;
+    margin: 5% auto;
+    border: 1px solid purple;
 }
 
 .scores {
@@ -21,23 +22,25 @@
     align-items: center;
     text-align: center;
     line-height: 6em;
+    border: 1px solid blue;
+    width: 50%;
 }
 
-.name-heading {
-    font-family: 'Press Start 2P', monospace;
+.player-name, .computer-name {
     font-size: 4rem;
 }
 
 .vs {
     color: var(--red);
     font-size: 6rem;
+    padding-bottom: 10%;
 }
 
 .score-heading {
     font-size: 3rem;
-    font-family: 'Press Start 2P', monospace;
     line-height: 2em;
-    min-width: 30vw;
+    width: 100%;
+    border: 1px solid green;
 }
 
 .score-num {
